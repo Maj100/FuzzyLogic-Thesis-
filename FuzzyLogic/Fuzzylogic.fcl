@@ -1,0 +1,220 @@
+
+
+FUNCTION_BLOCK Recommendation 	// Block definition (there may be more than one block per file)
+
+VAR_INPUT				// Define input variables
+
+	Sensitivity : REAL;
+	Frequency : REAL;
+	Freshness : REAL;
+	Time : REAL;
+	Volume : REAL;
+	Criticality : REAL;
+	
+END_VAR
+
+VAR_OUTPUT				// Define output variable
+	Recommendation : REAL;
+END_VAR
+
+FUZZIFY Sensitivity			// Fuzzify input variable 'Sensitivity': { 'High', 'Low' }
+	TERM Low := (0, 1) (3, 1) (10, 0) ; 
+	TERM High := (1, 0) (7, 1) ;
+	
+END_FUZZIFY
+
+FUZZIFY Frequency			// Fuzzify input variable 'Frequency': { 'ContiniousStream', 'RegularStreamShortGaps', 'RegularSteamLongGaps' }
+	TERM ContinuousStream := (0, 1) (2, 1) (4, 0);
+	TERM RegularStreamShortGaps := (3, 0) (4, 1) (5, 0);
+	TERM RegularStreamLongGaps := (4, 0) (5, 1) (10, 1) (10, 0);
+	
+END_FUZZIFY
+
+FUZZIFY Freshness			// Fuzzify input variable 'Freshness': { 'NotImportant', 'HighlyImportant' }
+	TERM NotImportant := (0, 1) (3, 1) (10, 0) ; 
+	TERM HighlyImportant := (1, 0) (7, 1) ;
+	
+END_FUZZIFY
+
+FUZZIFY Time			// Fuzzify input variable 'Time': {'RealTime', 'BatchProcessing' , 'NearRealTime' }
+	TERM RealTime := (0, 1) (3, 1) (4, 0) ; 
+	TERM NearRealTime := (6, 0) (7, 1) (10, 1) ;
+	TERM BatchProcessing := (3, 0) (4, 1) (6, 1) (7, 0);
+END_FUZZIFY
+
+FUZZIFY Volume			// Fuzzify input variable 'Volume': {'SmallAmount', 'LargeAmount' }
+	TERM SmallAmount := (0, 1) (4, 1) (6, 0) ; 
+	TERM LargeAmount := (4, 0) (6, 1) (10, 1) ;
+	
+END_FUZZIFY
+
+FUZZIFY Criticality			// Fuzzify input variable 'Criticality': {'NotImportant', 'HighlyImportant' }
+	TERM NotImportant := (0, 1) (3, 1) (10, 0) ; 
+	TERM HighlyImportant := (1, 0) (7, 1) ;
+
+END_FUZZIFY
+
+
+DEFUZZIFY Recommendation			// Defzzzify output variable 'Recommendation' : {'T2F2C', 'T2C', 'T2F', 'T2CF', 'T2C2F' }
+	TERM T2F2C := (0,0) (5,1) (10,0);
+	TERM T2C := (10,0) (15,1) (20,0);
+	TERM T2F := (20,0) (25,1) (30,0);
+	TERM T2C2F := (30,0) (35,1) (40,0);
+	
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+RULEBLOCK No1
+	AND : MIN;			// Use 'min' for 'and' (also implicit use 'max' for 'or' to fulfill DeMorgan's Law)
+	ACT : MIN;			// Use 'min' activation method
+	ACCU : MAX;			// Use 'max' accumulation method
+
+
+RULE 1 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 2 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 3 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 4 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 5 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 6 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 7 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 8 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 9 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 10 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 11 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 12 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 13 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 14 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 15 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 16 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 17 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 18 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 19 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 20 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 21 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 22 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 23 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 24 : IF Sensitivity IS High AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 25 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 26 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 27 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 28 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 29 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 30 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 31 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 32 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 33 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 34 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 35 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 36 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 37 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 38 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 39 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 40 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 41 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 42 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 43 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 44 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 45 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 46 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 47 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 48 : IF Sensitivity IS High AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 49 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 50 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 51 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 52 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 53 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 54 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 55 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 56 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 57 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 58 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 59 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 60 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 61 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 62 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 63 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 64 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 65 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 66 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 67 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 68 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 69 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 70 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 71 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 72 : IF Sensitivity IS High AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 73 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 74 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 75 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 76 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 77 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 78 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 79 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 80 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 81 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 82 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 83 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 84 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 85 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 86 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 87 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 88 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 89 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 90 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 91 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 92 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 93 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 94 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 95 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2F2C;
+RULE 96 : IF Sensitivity IS Low AND Frequency IS ContinuousStream AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F2C;
+RULE 97 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 98 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 99 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2C;
+RULE 100 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C;
+RULE 101 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 102 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 103 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2C;
+RULE 104 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C;
+RULE 105 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 106 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 107 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2C;
+RULE 108 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C;
+RULE 109 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 110 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 111 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2C;
+RULE 112 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C;
+RULE 113 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 114 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 115 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2C;
+RULE 116 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C;
+RULE 117 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2F;
+RULE 118 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2F;
+RULE 119 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2C;
+RULE 120 : IF Sensitivity IS Low AND Frequency IS RegularStreamShortGaps AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C;
+RULE 121 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2C2F;
+RULE 122 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C2F;
+RULE 123 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2C;
+RULE 124 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C;
+RULE 125 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2C2F;
+RULE 126 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C2F;
+RULE 127 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2C;
+RULE 128 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C;
+RULE 129 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2C2F;
+RULE 130 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C2F;
+RULE 131 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2C;
+RULE 132 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS NotImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C;
+RULE 133 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2C2F;
+RULE 134 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C2F;
+RULE 135 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2C;
+RULE 136 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS RealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C;
+RULE 137 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2C2F;
+RULE 138 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C2F;
+RULE 139 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2C;
+RULE 140 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS NearRealTime AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C;
+RULE 141 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS NotImportant THEN Recommendation IS T2C2F;
+RULE 142 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS SmallAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C2F;
+RULE 143 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS NotImportant THEN Recommendation IS T2C;
+RULE 144 : IF Sensitivity IS Low AND Frequency IS RegularStreamLongGaps AND Freshness IS HighlyImportant AND Time IS BatchProcessing AND Volume IS LargeAmount AND Criticality IS HighlyImportant THEN Recommendation IS T2C;
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK

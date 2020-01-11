@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane style="-fx-background-color: #2c2f33;"
+	xmlns="http://javafx.com/javafx/8.0.111"
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="Help.HelpController">
+	<children>
+		<AnchorPane fx:id="helpmain" prefHeight="611.0"
+			prefWidth="886.0">
+			<children>
+				<JFXButton fx:id="btn1" buttonType="RAISED"
+					layoutX="129.0" layoutY="186.0" onAction="#Openhelp"
+					prefHeight="74.0" prefWidth="310.0"
+					style="-fx-background-color: #525a66;" text="Fuzzy Logic"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+				<JFXButton fx:id="btn2" buttonType="RAISED"
+					layoutX="448.0" layoutY="186.0" onAction="#Openhelp"
+					prefHeight="74.0" prefWidth="310.0"
+					style="-fx-background-color: #525a66;" text="Fuzzy Logic Uploader"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+				<JFXButton fx:id="btn3" buttonType="RAISED"
+					layoutX="129.0" layoutY="299.0" onAction="#Openhelp"
+					prefHeight="74.0" prefWidth="185.0"
+					style="-fx-background-color: #525a66;" text="IoT Simulation"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+				<JFXButton fx:id="btn4" buttonType="RAISED"
+					layoutX="333.0" layoutY="299.0" onAction="#Openhelp"
+					prefHeight="74.0" prefWidth="220.0"
+					style="-fx-background-color: #525a66;" text="IoT Weather System"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+				<JFXButton fx:id="btn5" buttonType="RAISED"
+					layoutX="570.0" layoutY="299.0" onAction="#Openhelp"
+					prefHeight="74.0" prefWidth="185.0"
+					style="-fx-background-color: #525a66;" text="Credits"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+				<Label layoutX="234.0" layoutY="35.0" prefHeight="83.0"
+					prefWidth="428.0" text="How can we help you?" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="39.0" />
+					</font>
+				</Label>
+				<Label layoutX="225.0" layoutY="419.0" prefHeight="83.0"
+					prefWidth="428.0" text="Can't find what you're looking for?"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="26.0" />
+					</font>
+				</Label>
+				<Label layoutX="287.0" layoutY="477.0" prefHeight="74.0"
+					prefWidth="322.0" text="Do not hesitate and email me"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="22.0" />
+					</font>
+				</Label>
+				<Label layoutX="303.0" layoutY="534.0" prefHeight="63.0"
+					prefWidth="291.0" text="M.Alshibly@2015.ljmu.ac.uk"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="21.0" />
+					</font>
+				</Label>
+			</children>
+		</AnchorPane>
+		<AnchorPane fx:id="p1" prefHeight="611.0" prefWidth="886.0"
+			style="-fx-background-color: #2c2f33; visibility: false;">
+			<children>
+				<Label layoutX="257.0" layoutY="39.0" prefHeight="83.0"
+					prefWidth="372.0" text="Fuzzy Logic Tutorial" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="39.0" />
+					</font>
+				</Label>
+				<ImageView fitHeight="164.0" fitWidth="280.0"
+					layoutX="83.0" layoutY="148.0">
+					<image>
+						<Image url="@../../images/help_images/1.png" />
+					</image>
+				</ImageView>
+				<ImageView fitHeight="164.0" fitWidth="280.0"
+					layoutX="515.0" layoutY="148.0">
+					<image>
+						<Image url="@../../images/help_images/2.png" />
+					</image>
+				</ImageView>
+				<Label layoutX="90.0" layoutY="325.0" prefHeight="39.0"
+					prefWidth="280.0" text="Fuzzy Control Language" textFill="WHITE">
+					<font>
+						<Font size="26.0" />
+					</font>
+				</Label>
+				<Label layoutX="523.0" layoutY="325.0" prefHeight="39.0"
+					prefWidth="264.0" text="Powerful Fuzzy Graphs" textFill="WHITE">
+					<font>
+						<Font size="26.0" />
+					</font>
+				</Label>
+				<Label layoutX="39.0" layoutY="377.0" prefHeight="122.0"
+					prefWidth="382.0"
+					text="This program uses JFuzyLogic which implements&#10; Fuzzy Control Language (FCL) that standardizes &#10; Programming Fuzzy Logic systems helps to produce&#10; Fuzzification, define membership functions, rules etc. &#10;&#10;"
+					textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="16.0" />
+					</font>
+				</Label>
+				<Label layoutX="464.0" layoutY="377.0" prefHeight="122.0"
+					prefWidth="382.0"
+					text="This program allows the use of multiple membership&#10;Functions by printing different Fuzzifying graphs. &#10;In the form of input and output criteria’s. &#10;"
+					textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="16.0" />
+					</font>
+				</Label>
+				<JFXButton fx:id="btn1b" buttonType="RAISED"
+					layoutX="708.0" layoutY="526.0" onAction="#Openhelp"
+					prefHeight="56.0" prefWidth="138.0"
+					style="-fx-background-color: #525a66;" text="Next" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+				<JFXButton fx:id="btn1a" buttonType="RAISED"
+					layoutX="39.0" layoutY="526.0" onAction="#Openhelp"
+					prefHeight="56.0" prefWidth="138.0"
+					style="-fx-background-color: #525a66;" text="Menu" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+			</children>
+		</AnchorPane>
+		<AnchorPane fx:id="p1a" prefHeight="621.0"
+			prefWidth="896.0"
+			style="-fx-background-color: #2c2f33; visibility: false;">
+			<children>
+				<JFXButton fx:id="btn1c" buttonType="RAISED"
+					layoutX="39.0" layoutY="526.0" onAction="#Openhelp"
+					prefHeight="56.0" prefWidth="138.0"
+					style="-fx-background-color: #525a66;" text="Previous"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+				<Label layoutX="231.0" layoutY="32.0" prefHeight="83.0"
+					prefWidth="435.0" text="Fuzzy Logic Tutorial #2" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="39.0" />
+					</font>
+				</Label>
+				<ImageView fitHeight="323.0" fitWidth="291.0"
+					layoutX="542.0" layoutY="129.0">
+					<image>
+						<Image url="@../../images/help_images/demo.gif" />
+					</image>
+				</ImageView>
+				<Label layoutX="37.0" layoutY="103.0" prefHeight="415.0"
+					prefWidth="445.0"
+					text="The Fuzzy Logic Application allows you to choose &#10;between 6 criterions. To initiate the system, you &#10;must change the intensity level of each criterion&#10;You may drag the slider to choose the level or a &#10;text field is also included that Automatically changes &#10;its value depending on their slider’s position. &#10;&#10;Correspondingly, the slider also moves its position&#10;depending on the Value inside the text field. &#10;The minimum and maximum values go from 0 – 10,&#10;That snaps to the next integer. The slider can also shift &#10;with the left and right keys. &#10;"
+					textAlignment="JUSTIFY" textFill="WHITE">
+					<font>
+						<Font size="17.0" />
+					</font>
+				</Label>
+				<Label layoutX="414.0" layoutY="462.0" prefHeight="128.0"
+					prefWidth="419.0"
+					text="Once you have chosen the &#10;Membership criterions, the “Show Results” button &#10;Will start the fuzzification process to display the gravity &#10;of inputs &amp; recommendation&#10;"
+					textAlignment="JUSTIFY" textFill="WHITE">
+					<font>
+						<Font size="17.0" />
+					</font>
+				</Label>
+			</children>
+		</AnchorPane>
+		<AnchorPane fx:id="p2" layoutX="10.0" layoutY="10.0"
+			prefHeight="621.0" prefWidth="896.0"
+			style="-fx-background-color: #2c2f33; visibility: false;">
+			<children>
+				<Label layoutX="72.0" layoutY="240.0" prefHeight="128.0"
+					prefWidth="743.0"
+					text="The Fuzzy Logic Uploader is an extension of the main Fuzzy Logic&#10;System. The purpose and criterions are shared. The difference is&#10;Instead of manually deciding the criterions, the Fuzzy Logic Uploader allows &#10;You to automatically receive the results depending on the Folder’s Details.&#10;"
+					textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="20.0" />
+					</font>
+				</Label>
+				<Label layoutX="158.0" layoutY="23.0" prefHeight="83.0"
+					prefWidth="551.0" text="Fuzzy Logic Uploader Tutorial"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="39.0" />
+					</font>
+				</Label>
+				<ImageView fitHeight="103.0" fitWidth="138.0"
+					layoutX="361.0" layoutY="122.0">
+					<image>
+						<Image url="@../../images/help_images/3.png" />
+					</image>
+				</ImageView>
+				<Label layoutX="314.0" layoutY="368.0" prefHeight="56.0"
+					prefWidth="232.0" text="These Details Consist of" textFill="WHITE"
+					underline="true">
+					<font>
+						<Font name="System Bold" size="20.0" />
+					</font>
+				</Label>
+				<Label layoutX="15.0" layoutY="428.0" prefHeight="56.0"
+					prefWidth="124.0" text="◉ Folder Size" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="20.0" />
+					</font>
+				</Label>
+				<Label layoutX="172.0" layoutY="428.0" prefHeight="56.0"
+					prefWidth="185.0" text="◉ Amount in Folder" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="20.0" />
+					</font>
+				</Label>
+				<Label layoutX="380.0" layoutY="428.0" prefHeight="56.0"
+					prefWidth="240.0" text="◉ Includes Streaming File" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="20.0" />
+					</font>
+				</Label>
+				<Label layoutX="641.0" layoutY="428.0" prefHeight="56.0"
+					prefWidth="232.0" text="◉ Includes Sensitive File" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="20.0" />
+					</font>
+				</Label>
+				<JFXButton fx:id="btn2a" buttonType="RAISED"
+					layoutX="29.0" layoutY="515.0" onAction="#Openhelp"
+					prefHeight="56.0" prefWidth="138.0"
+					style="-fx-background-color: #525a66;" text="Menu" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+			</children>
+		</AnchorPane>
+		<AnchorPane fx:id="p3" layoutY="20.0" prefHeight="621.0"
+			prefWidth="916.0"
+			style="-fx-background-color: #2c2f33; visibility: false;">
+			<children>
+				<JFXButton fx:id="btn3a" buttonType="RAISED"
+					layoutX="17.0" layoutY="504.0" onAction="#Openhelp"
+					prefHeight="56.0" prefWidth="138.0"
+					style="-fx-background-color: #525a66;" text="Menu" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+				<Label layoutX="165.0" prefHeight="83.0" prefWidth="577.0"
+					text="IoT Tunnel Simulation Tutorial" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="39.0" />
+					</font>
+				</Label>
+				<Label layoutX="192.0" layoutY="90.0" prefHeight="116.0"
+					prefWidth="522.0"
+					text="The purpose of this system is to provide you &#10;An experiment that would show the difference between&#10;Using Strong Pivot &amp; Weak Pivot in the form of flushing &#10;Carbon Dioxide inside a Tunnel. &#10;"
+					textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="19.0" />
+					</font>
+				</Label>
+				<Label layoutX="165.0" layoutY="230.0" prefHeight="45.0"
+					prefWidth="106.0" text="Weak Pivot" textFill="WHITE"
+					underline="true">
+					<font>
+						<Font name="System Bold" size="19.0" />
+					</font>
+				</Label>
+				<Label layoutX="623.0" layoutY="230.0" prefHeight="45.0"
+					prefWidth="124.0" text="Strong Pivot" textFill="WHITE"
+					underline="true">
+					<font>
+						<Font name="System Bold" size="19.0" />
+					</font>
+				</Label>
+				<ImageView fitHeight="103.0" fitWidth="382.0"
+					layoutX="-6.0" layoutY="311.0">
+					<image>
+						<Image url="@../../images/help_images/4.png" />
+					</image>
+				</ImageView>
+				<ImageView fitHeight="199.0" fitWidth="482.0"
+					layoutX="398.0" layoutY="295.0">
+					<image>
+						<Image url="@../../images/help_images/5.png" />
+					</image>
+				</ImageView>
+				<JFXButton fx:id="btn3b" buttonType="RAISED"
+					layoutX="719.0" layoutY="504.0" onAction="#Openhelp"
+					prefHeight="56.0" prefWidth="138.0"
+					style="-fx-background-color: #525a66;" text="Next" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+
+			</children>
+		</AnchorPane>
+		<AnchorPane fx:id="p3a" prefHeight="621.0"
+			prefWidth="916.0"
+			style="-fx-background-color: #2c2f33; visibility: false;">
+			<children>
+				<JFXButton fx:id="btn3c" buttonType="RAISED"
+					layoutX="17.0" layoutY="525.0" onAction="#Openhelp"
+					prefHeight="56.0" prefWidth="138.0"
+					style="-fx-background-color: #525a66;" text="Previous"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+				<Label layoutX="151.0" layoutY="29.0" prefHeight="63.0"
+					prefWidth="624.0" text="IoT Tunnel Simulation Tutorial #2"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="39.0" />
+					</font>
+				</Label>
+				<Label layoutX="28.0" layoutY="171.0" prefHeight="116.0"
+					prefWidth="435.0"
+					text="Just as both the diagrams show. The user is able&#10;To choose between two pivots. Additionally,&#10;The user is also able to exert two levels of Co2.&#10;Into the Tunnel: Concern &amp; Danger Levels"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="17.0" />
+					</font>
+				</Label>
+				<ImageView fitHeight="91.0" fitWidth="280.0"
+					layoutX="474.0" layoutY="159.0">
+					<image>
+						<Image url="@../../images/help_images/6.PNG" />
+					</image>
+				</ImageView>
+				<Label layoutX="28.0" layoutY="326.0" prefHeight="156.0"
+					prefWidth="482.0"
+					text="Once you have selected the form of Pivot &amp; The level,&#10;You must then press the “Flush Co2 gas” Button Below&#10;Which will begin the Process (depending on your selection)&#10;You will see the slider move up while the fans are trying to&#10;Flush out the Co2 gas from inside the tunnel&#10;"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="17.0" />
+					</font>
+				</Label>
+				<ImageView fitHeight="335.0" fitWidth="106.0"
+					layoutX="561.0" layoutY="260.0">
+					<image>
+						<Image url="@../../images/help_images/7.png" />
+					</image>
+				</ImageView>
+				<JFXButton fx:id="btn3c1" buttonType="RAISED"
+					layoutX="719.0" layoutY="525.0" onAction="#Openhelp"
+					prefHeight="56.0" prefWidth="138.0"
+					style="-fx-background-color: #525a66;" text="Next" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+			</children>
+		</AnchorPane>
+		<AnchorPane fx:id="p3b" layoutX="10.0" layoutY="10.0"
+			prefHeight="621.0" prefWidth="916.0"
+			style="-fx-background-color: #2c2f33; visibility: false;">
+			<children>
+				<JFXButton fx:id="btn3c2" buttonType="RAISED"
+					layoutX="7.0" layoutY="515.0" onAction="#Openhelp"
+					prefHeight="56.0" prefWidth="138.0"
+					style="-fx-background-color: #525a66;" text="Previous"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+				<Label layoutX="51.0" layoutY="24.0" prefHeight="63.0"
+					prefWidth="771.0" text="IoT Tunnel Simulation Tutorial #3 - Levels"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="39.0" />
+					</font>
+				</Label>
+				<Label layoutX="123.0" layoutY="138.0" prefHeight="39.0"
+					prefWidth="154.0" text="Concern Level" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="22.0" />
+					</font>
+				</Label>
+				<Label layoutX="564.0" layoutY="138.0" prefHeight="39.0"
+					prefWidth="138.0" text="Danger Level" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="22.0" />
+					</font>
+				</Label>
+				<Label layoutX="14.0" layoutY="203.0" prefHeight="103.0"
+					prefWidth="372.0"
+					text="The Concern level shows a steady increase in fan &#10;Speed that matches the concentration of Co2 inside.&#10;This level only warns that there is unusual levels and&#10;takes action.&#10;"
+					textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="16.0" />
+					</font>
+				</Label>
+				<Label layoutX="411.0" layoutY="191.0" prefHeight="128.0"
+					prefWidth="454.0"
+					text="The Danger level is more of a threat and shows that&#10;There are high levels of concentration inside the tunnel&#10;The operation begins by spinning the fan at maximum speed &#10;The fan then sends the signal to the tunnel traffic light and turns&#10;To red. The alternative road’s traffic light becomes green. &#10;&#10;"
+					textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="16.0" />
+					</font>
+				</Label>
+				<ImageView fitHeight="164.0" fitWidth="97.0"
+					layoutX="410.0" layoutY="354.0">
+					<image>
+						<Image url="@../../images/help_images/9.png" />
+					</image>
+				</ImageView>
+				<ImageView fitHeight="164.0" fitWidth="97.0"
+					layoutX="744.0" layoutY="354.0">
+					<image>
+						<Image url="@../../images/help_images/10.png" />
+					</image>
+				</ImageView>
+				<ImageView fitHeight="93.0" fitWidth="200.0"
+					layoutX="529.0" layoutY="354.0">
+					<image>
+						<Image url="@../../images/fanspeed/traffic.jpg" />
+					</image>
+				</ImageView>
+				<ImageView fitHeight="200.0" fitWidth="200.0"
+					layoutX="105.0" layoutY="311.0">
+					<image>
+						<Image url="@../../images/fanspeed/mid1.gif" />
+					</image>
+				</ImageView>
+				<JFXButton fx:id="btn3c3" buttonType="RAISED"
+					layoutX="715.0" layoutY="518.0" onAction="#Openhelp"
+					prefHeight="56.0" prefWidth="138.0"
+					style="-fx-background-color: #525a66;" text="Next" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+			</children>
+		</AnchorPane>
+		<AnchorPane fx:id="p3c" prefHeight="641.0"
+			prefWidth="936.0"
+			style="-fx-background-color: #2c2f33; visibility: false;">
+			<children>
+				<JFXButton fx:id="btn3c4" buttonType="RAISED"
+					layoutX="17.0" layoutY="525.0" onAction="#Openhelp"
+					prefHeight="56.0" prefWidth="138.0"
+					style="-fx-background-color: #525a66;" text="Previous"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+				<Label layoutX="62.0" layoutY="34.0" prefHeight="63.0"
+					prefWidth="771.0" text="IoT Tunnel Simulation Tutorial #4 - Pivot"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="39.0" />
+					</font>
+				</Label>
+				<Label layoutX="76.0" layoutY="112.0" prefHeight="141.0"
+					prefWidth="743.0"
+					text="This program simulates the procedures of Weak &amp; Strong Pivot by how the activation of the fan is &#10;Achieved. To simulate the chance of succession through the Pivot Transactional Method, this &#10;Program was developed to by incorporating a 1/2 (half) chance of achieving succession and this &#10;Chance goes through two separate pathways each for both the Strong Pivot and Weak Pivot &#10;as shown in the diagram below&#10;"
+					textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="17.0" />
+					</font>
+				</Label>
+				<ImageView fitHeight="237.0" fitWidth="332.0"
+					layoutX="76.0" layoutY="269.0">
+					<image>
+						<Image url="@../../images/help_images/11.png" />
+					</image>
+				</ImageView>
+				<ImageView fitHeight="249.0" fitWidth="352.0"
+					layoutX="483.0" layoutY="263.0">
+					<image>
+						<Image url="@../../images/help_images/12.png" />
+					</image>
+				</ImageView>
+			</children>
+		</AnchorPane>
+		<AnchorPane fx:id="p4" prefHeight="651.0" prefWidth="946.0"
+			style="-fx-background-color: #2c2f33; visibility: false;">
+			<children>
+				<JFXButton fx:id="btn4a" buttonType="RAISED"
+					layoutX="15.0" layoutY="524.0" onAction="#Openhelp"
+					prefHeight="56.0" prefWidth="138.0"
+					style="-fx-background-color: #525a66;" text="Home" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+				<Label layoutX="201.0" layoutY="210.0" text="Label" />
+				<Label layoutX="251.0" layoutY="26.0" prefHeight="63.0"
+					prefWidth="382.0" text="IoT Weather Tutorial" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="39.0" />
+					</font>
+				</Label>
+				<Label layoutX="46.0" layoutY="123.0" prefHeight="128.0"
+					prefWidth="792.0"
+					text="The IoT Weather Sensor was designed to cater towards the interlacing transactional properties of&#10;IoT devices. These properties referred to as Pivot, Retrievable and Compensable. But to begin with.&#10;The system shows off the first stage of the application which senses the live temperature of a&#10;Particular city, actuates the city’s temperature, then communicates to you what you should wear.&#10;"
+					textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="18.0" />
+					</font>
+				</Label>
+				<ImageView fitHeight="164.0" fitWidth="666.0"
+					layoutX="105.0" layoutY="326.0">
+					<image>
+						<Image url="@../../images/help_images/13.PNG" />
+					</image>
+				</ImageView>
+				<Label layoutX="140.0" layoutY="268.0" prefHeight="39.0"
+					prefWidth="81.0" text="Step 1" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="25.0" />
+					</font>
+				</Label>
+				<Label layoutX="407.0" layoutY="268.0" prefHeight="39.0"
+					prefWidth="81.0" text="Step 2" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="25.0" />
+					</font>
+				</Label>
+				<Label layoutX="658.0" layoutY="268.0" prefHeight="39.0"
+					prefWidth="81.0" text="Step 3" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="25.0" />
+					</font>
+				</Label>
+				<JFXButton fx:id="btn4b" buttonType="RAISED"
+					layoutX="730.0" layoutY="524.0" onAction="#Openhelp"
+					prefHeight="56.0" prefWidth="138.0"
+					style="-fx-background-color: #525a66;" text="Next" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+			</children>
+		</AnchorPane>
+		<AnchorPane fx:id="p4a" prefHeight="661.0"
+			prefWidth="956.0"
+			style="-fx-background-color: #2c2f33; visibility: false;">
+			<children>
+				<JFXButton fx:id="btn4c" buttonType="RAISED"
+					layoutX="15.0" layoutY="524.0" onAction="#Openhelp"
+					prefHeight="56.0" prefWidth="138.0"
+					style="-fx-background-color: #525a66;" text="Previous"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+				<Label layoutX="231.0" layoutY="26.0" prefHeight="63.0"
+					prefWidth="445.0" text="IoT Weather Tutorial #2" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="39.0" />
+					</font>
+				</Label>
+				<Label layoutX="48.0" layoutY="110.0" prefHeight="221.0"
+					prefWidth="810.0"
+					text="The steps above followed the complete process of initiating all of the duties of an IoT decvice &#10;interms of sensing (collecting and capturing data), Actuatung ( Processing and acting upon the data) &#10;and communicaiton (sharing and distrubting the data). These duties are either enabled or disabled &#10;according to an IoT device. The steps above illustrated the complete procedure but this can also vary &#10;by having the functuionality use only 2/3 duties or even single duties at a time. This brings us the the &#10;next step of the program, which is the second portion of the program that takes place by inspecting &#10;what duties have been activated and displaying an atomitciy report depending on those currently &#10;activated duties."
+					textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="18.0" />
+					</font>
+				</Label>
+				<ImageView fitHeight="156.0" fitWidth="611.0"
+					layoutX="136.0" layoutY="351.0">
+					<image>
+						<Image url="@../../images/help_images/14.png" />
+					</image>
+				</ImageView>
+				<Label layoutX="232.0" layoutY="515.0" prefHeight="74.0"
+					prefWidth="419.0"
+					text="Above shows the duties that have been selected:&#10;Sense (S), Actuate (A), Communicate (C)."
+					textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</Label>
+			</children>
+		</AnchorPane>
+		<AnchorPane fx:id="p5" prefHeight="671.0" prefWidth="966.0"
+			style="-fx-background-color: #2c2f33; visibility: false;">
+			<children>
+				<JFXButton fx:id="btn5a" buttonType="RAISED"
+					layoutX="14.0" layoutY="518.0" onAction="#Openhelp"
+					prefHeight="56.0" prefWidth="138.0"
+					style="-fx-background-color: #525a66;" text="Home" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</JFXButton>
+				<Label layoutX="302.0" layoutY="195.0" prefHeight="141.0"
+					prefWidth="280.0" text="Created by&#10;Maj Alshibly"
+					textFill="WHITE">
+					<font>
+						<Font name="System Bold Italic" size="46.0" />
+					</font>
+				</Label>
+			</children>
+		</AnchorPane>
+	</children>
+</AnchorPane>
