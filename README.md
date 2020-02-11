@@ -1,3 +1,4 @@
+# Please check images folder for more examples of the program!!!
 
 ![alt text](https://github.com/Maj100/FuzzyLogic-Thesis-/blob/master/images/7.png)
 
@@ -5,7 +6,7 @@
 
 ![alt text](https://github.com/Maj100/FuzzyLogic-Thesis-/blob/master/images/16.png)
 
-# Please check images folder for more examples of the program.
+# Please check images folder for more examples of the program!!!
 
 # Abstract
 
