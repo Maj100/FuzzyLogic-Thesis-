@@ -1,3 +1,6 @@
+
+![alt text](https://github.com/Maj100/FuzzyLogic-Thesis-/blob/master/images/7.png)
+
 # Abstract
 
 Fog computing is the next generation in the Cloud computing paradigm. It has emerged as a promising technology that can bring the IoT device closer to the cloud network. In a practical sense, the fog&#39;s role is to collaborate with the Cloud instead of replacing it. It does this by processing the data that is sent by the IoT within the fog and then sent to the cloud for additional computations and storage. There are many benefits to this model because it reduces the time involved in the process and it is more efficient for the cloud as it reduces load. Because the Fog has various characteristics that differ from modern computing paradigms such as the ability to transfer data through a geographical distribution. This will allow the fog to be more flexible than the cloud since thousands of fog nodes can be placed across the city. This interoperability brings in the notion of having accurate and seamless support for real-time services that a centralized cloud would not be able to bring about. Fog computing also boasts its privacy dominance in the cloud market place. Fog machines can be purchased for private use for companies and even individuals that can allow the processing of data to happen in the local level, so the concern of sensitive data being analysed by an outside corporation will be diminished. However, just like the Cloud, the Fog also has downfalls. Two in particular are the storage issues and the capability to process big complex data. The cloud can have almost infinite storage with powerful capabilities that aims for long-term deep analysis because of its architecture while the fog performs short-term edge analysis due to its instant responsiveness.
@@ -1263,14 +1266,4 @@ Appendix 1: Pre Development – Home Menu
 24
 
 #
-[https://www.oracle.com/technetwork/java/embedded/javame/index.html](https://www.oracle.com/technetwork/java/embedded/javame/index.html)
-
-25
-
-#
-[https://www.oracle.com/technetwork/java/javase/overview/index.html](https://www.oracle.com/technetwork/java/javase/overview/index.html)
-
-26
-
-#
-[https://www.oracle.com/technetwork/java/javaee/overview/index.html](https://www.oracle.com/technetwork/java/javaee/overview/index.html)
+[https://www.oracle.com/technetwork/java/embedde
